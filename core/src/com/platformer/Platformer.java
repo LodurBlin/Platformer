@@ -56,7 +56,7 @@ public class Platformer extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		batch.draw(ggTex, player.getPosition().x/PPM, player.getPosition().y/PPM);
+		batch.draw(ggTex, player.getPosition().x/PPM + Gdx.graphics.getWidth()/2 - ggTex.getWidth()/2, player.getPosition().y/PPM + Gdx.graphics.getHeight()/2- ggTex.getHeight()/2);
 		batch.end();
 
 		b2dr.render(world, camera.combined.scl(PPM));
