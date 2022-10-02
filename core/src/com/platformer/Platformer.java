@@ -13,6 +13,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
@@ -22,14 +26,19 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import static com.platformer.utils.Constants.PPM;
 
 public class Platformer extends ApplicationAdapter {
-	//private boolean DEBUG = false;
+	private boolean DEBUG = false;
 	private final float SCALE = 2.0f;
 	private OrthographicCamera camera;
+	private Box2DDebugRenderer b2dr;
+
 	private World world; //laws of physics
 	private Body player;
-	private Box2DDebugRenderer b2dr;
+
 	private SpriteBatch batch;
 	private Texture ggTex;
+
+	private OrthogonalTiledMapRenderer tmr;
+	private TiledMap map;
 
 	@Override
 	public void create () {
@@ -42,11 +51,14 @@ public class Platformer extends ApplicationAdapter {
 		world = new World(new Vector2(0, -9.8f), false);
 		b2dr = new Box2DDebugRenderer();
 
-		createBox(0, 0, 80, 20, true);
-		player = createBox(0, 20, 64, 64, false);
+		createBox(70, 20, 80, 20, true);
+		player = createBox(60, 40, 48, 48, false);
 
 		batch = new SpriteBatch();
-		ggTex = new Texture("floppa.png");
+		ggTex = new Texture("images/floppa.png");
+
+		map = new TmxMapLoader().load("maps/map.tmx");
+		tmr = new OrthogonalTiledMapRenderer(map);
 	}
 
 	@Override
@@ -59,6 +71,7 @@ public class Platformer extends ApplicationAdapter {
 		batch.draw(ggTex, player.getPosition().x/PPM + Gdx.graphics.getWidth()/2 - ggTex.getWidth()/2, player.getPosition().y/PPM + Gdx.graphics.getHeight()/2- ggTex.getHeight()/2);
 		batch.end();
 
+		tmr.render();
 		b2dr.render(world, camera.combined.scl(PPM));
 		if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
 	}
@@ -74,6 +87,8 @@ public class Platformer extends ApplicationAdapter {
 		world.dispose();
 		b2dr.dispose();
 		batch.dispose();
+		tmr.dispose();
+		map.dispose();
 	}
 
 
@@ -83,6 +98,7 @@ public class Platformer extends ApplicationAdapter {
 		world.step(1/60f, 6, 2);
 		inputUpdate(delta);
 		cameraUpdate(delta);
+		tmr.setView(camera);
 		//batch.setProjectionMatrix(camera.combined);
 	}
 	public void inputUpdate(float delta){

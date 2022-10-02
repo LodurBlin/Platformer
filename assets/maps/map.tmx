@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="12" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="13">
+ <tileset firstgid="1" source="../tiles/New Piskel (1).tsx"/>
+ <tileset firstgid="2" source="../tiles/a.tsx"/>
+ <tileset firstgid="3" source="../tiles/b.tsx"/>
+ <tileset firstgid="4" source="../tiles/angle.tsx"/>
+ <tileset firstgid="5" source="../tiles/c.tsx"/>
+ <tileset firstgid="6" source="../tiles/d.tsx"/>
+ <layer id="1" name="Слой тайлов 1" width="12" height="12">
+  <data encoding="base64">
+   AwAAoAEAAMABAADAAQAAwAEAAMABAADAAQAAwAEAAMABAADAAQAAwAEAAMADAADAAQAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABgAQAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAoAAAAAABAABgAQAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAABgBAAAwAAAAAABAABgAQAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABgAQAAoAAAAAAAAAAAAAAAAAUAAAAGAAAABQAAwAAAAAAAAAAAAAAAAAAAAAABAABgAQAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABgAQAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAGAAAABQAAwAAAAAABAABgAQAAoAAAAAAAAAAABAAAAAQAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABgAQAAoAAAAAAAAAAABAAAYAQAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABgAQAAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAABgAwAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAADAABg
+  </data>
+ </layer>
+ <objectgroup id="2" name="Слой объектов 1">
+  <object id="12" x="30.165" y="352.595">
+   <polygon points="0,0 0.670333,-321.76 322.43,-322.43 322.43,-0.670333"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="3" name="Слой объектов 2">
+  <object id="6" x="256.209" y="64.3875" width="63.9404" height="63.4932"/>
+  <object id="7" x="128.328" y="160.522" width="94.3456" height="31.2995"/>
+  <object id="8" x="223.568" y="224.462" width="95.687" height="30.8524"/>
+  <object id="9" x="96.1341" y="256.209" width="63.4932" height="63.4932"/>
+ </objectgroup>
+</map>
