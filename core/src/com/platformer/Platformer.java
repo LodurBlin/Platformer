@@ -4,11 +4,14 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -53,7 +56,7 @@ public class Platformer extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		batch.draw(ggTex, player.getPosition().x - (ggTex.getWidth()/2), player.getPosition().y - ggTex.getHeight()/2);
+		batch.draw(ggTex, player.getPosition().x/PPM, player.getPosition().y/PPM);
 		batch.end();
 
 		b2dr.render(world, camera.combined.scl(PPM));
@@ -80,7 +83,7 @@ public class Platformer extends ApplicationAdapter {
 		world.step(1/60f, 6, 2);
 		inputUpdate(delta);
 		cameraUpdate(delta);
-		batch.setProjectionMatrix(camera.combined);
+		//batch.setProjectionMatrix(camera.combined);
 	}
 	public void inputUpdate(float delta){
 		int horizontalForce = 0;
