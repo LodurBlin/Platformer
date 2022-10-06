@@ -59,9 +59,9 @@ public class Platformer extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		ggTex = new Texture("images/floppa.png");
 
-		map = new TmxMapLoader().load("maps/map.tmx");
+		map = new TmxMapLoader().load("maps/level1.tmx");
 		tmr = new OrthogonalTiledMapRenderer(map);
-		TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("Collision-layer_1").getObjects());
+		TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("Object Layer 1").getObjects());
 	}
 
 	@Override
