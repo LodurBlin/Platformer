@@ -117,7 +117,7 @@ public class Platformer extends ApplicationAdapter {
 			horizontalForce +=1;
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-			player.applyForceToCenter(0, 700, false);
+			player.applyForceToCenter(0, 1000, false);
 		}
 		player.setLinearVelocity(horizontalForce *5, player.getLinearVelocity().y);
 	}
