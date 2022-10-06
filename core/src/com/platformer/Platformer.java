@@ -23,6 +23,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.platformer.utils.TiledObjects;
+
 import static com.platformer.utils.Constants.PPM;
 
 public class Platformer extends ApplicationAdapter {
@@ -59,15 +61,18 @@ public class Platformer extends ApplicationAdapter {
 
 		map = new TmxMapLoader().load("maps/map.tmx");
 		tmr = new OrthogonalTiledMapRenderer(map);
+		TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("Collision-layer_1").getObjects());
 	}
 
 	@Override
 	public void render () {
 		update(Gdx.graphics.getDeltaTime());
 		ScreenUtils.clear(Color.BLACK);
+		//Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
+
 		batch.draw(ggTex, player.getPosition().x/PPM + Gdx.graphics.getWidth()/2 - ggTex.getWidth()/2, player.getPosition().y/PPM + Gdx.graphics.getHeight()/2- ggTex.getHeight()/2);
 		batch.end();
 
@@ -80,6 +85,7 @@ public class Platformer extends ApplicationAdapter {
 	public void resize (int width, int height) {
 
 		camera.setToOrtho(false, width/SCALE, height/SCALE);
+
 	}
 
 	@Override
@@ -87,6 +93,7 @@ public class Platformer extends ApplicationAdapter {
 		world.dispose();
 		b2dr.dispose();
 		batch.dispose();
+		ggTex.dispose();
 		tmr.dispose();
 		map.dispose();
 	}
@@ -99,7 +106,7 @@ public class Platformer extends ApplicationAdapter {
 		inputUpdate(delta);
 		cameraUpdate(delta);
 		tmr.setView(camera);
-		//batch.setProjectionMatrix(camera.combined);
+		//batch.setProjectionMatrix(camera.combined); //Оно ломает текстуру и по идее это resize
 	}
 	public void inputUpdate(float delta){
 		int horizontalForce = 0;
