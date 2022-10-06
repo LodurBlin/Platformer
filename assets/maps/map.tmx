@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="12" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="15">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="12" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="18">
  <tileset firstgid="1" source="../tiles/New Piskel (1).tsx"/>
  <tileset firstgid="2" source="../tiles/a.tsx"/>
  <tileset firstgid="3" source="../tiles/b.tsx"/>
@@ -12,8 +12,8 @@
   </data>
  </layer>
  <objectgroup id="2" name="Collision-layer_1">
-  <object id="13" x="63.6816" y="29.4946">
-   <polygon points="2.011,0.670333 -31.5056,36.198 -32.8463,288.243 -2.011,321.76 255.397,323.771 288.913,289.584 289.584,31.5056 256.067,0.670333"/>
+  <object id="16" x="31.5056" y="31.5056">
+   <polygon points="0,0 -0.670333,320.419 320.419,321.089 321.089,-1.34067"/>
   </object>
  </objectgroup>
  <objectgroup id="3" name="Collision-layer_2">

@@ -13,8 +13,8 @@ public class Controls {
         if (Gdx.input.isKeyPressed(Input.Keys.D)){
             horizontalForce +=1;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            player.applyForceToCenter(0, 300, false);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
+            player.applyForceToCenter(0, 700, false);
         }
         player.setLinearVelocity(horizontalForce *5, player.getLinearVelocity().y);
     }

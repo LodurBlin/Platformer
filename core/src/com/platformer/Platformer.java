@@ -53,8 +53,8 @@ public class Platformer extends ApplicationAdapter {
 		world = new World(new Vector2(0, -9.8f), false);
 		b2dr = new Box2DDebugRenderer();
 
-		createBox(70, 20, 80, 20, true);
-		player = createBox(60, 40, 48, 48, false);
+		//createBox(70, 70, 70, 20, true);
+		player = createBox(90, 110, 48, 48, false);
 
 		batch = new SpriteBatch();
 		ggTex = new Texture("images/floppa.png");
