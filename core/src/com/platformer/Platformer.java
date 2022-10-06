@@ -4,14 +4,13 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 
-import com.badlogic.gdx.assets.AssetManager;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -23,6 +22,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.platformer.utils.Controls;
 import com.platformer.utils.TiledObjects;
 
 import static com.platformer.utils.Constants.PPM;
@@ -103,24 +103,12 @@ public class Platformer extends ApplicationAdapter {
 
 	public void update(float delta){
 		world.step(1/60f, 6, 2);
-		inputUpdate(delta);
+		Controls.inputUpdate(delta, player);
 		cameraUpdate(delta);
 		tmr.setView(camera);
 		//batch.setProjectionMatrix(camera.combined); //Оно ломает текстуру и по идее это resize
 	}
-	public void inputUpdate(float delta){
-		int horizontalForce = 0;
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			horizontalForce -=1;
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-			horizontalForce +=1;
-		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-			player.applyForceToCenter(0, 1000, false);
-		}
-		player.setLinearVelocity(horizontalForce *5, player.getLinearVelocity().y);
-	}
+
 	public void cameraUpdate(float delta){
 		Vector3 position = camera.position;
 		position.x = player.getPosition().x * PPM; //get info
