@@ -49,11 +49,9 @@ public class Platformer extends ApplicationAdapter {
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, (w/SCALE), (h/SCALE));
-
 		world = new World(new Vector2(0, -9.8f), false);
 		b2dr = new Box2DDebugRenderer();
 
-		//createBox(70, 70, 70, 20, true);
 		player = createBox(90, 110, 48, 48, false);
 
 		batch = new SpriteBatch();
@@ -66,7 +64,8 @@ public class Platformer extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		update(Gdx.graphics.getDeltaTime());
+		update(Gdx.graphics.getDeltaTime()); //delta позволяет с одинаковой скоростью двигаться при разных fps
+		//правда на вертикальной оси у меня не получилось ее заставить работать
 		ScreenUtils.clear(Color.BLACK);
 		//Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

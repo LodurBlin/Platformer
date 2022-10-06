@@ -16,6 +16,6 @@ public class Controls {
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
             player.applyForceToCenter(0, 700, false);
         }
-        player.setLinearVelocity(horizontalForce *5, player.getLinearVelocity().y);
+        player.setLinearVelocity(horizontalForce *400*delta, player.getLinearVelocity().y);
     }
 }
