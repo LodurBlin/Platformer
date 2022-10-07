@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import static com.platformer.utils.Constants.PPM;
 
 public class TiledObjects {
-    static Array<Body> bodies = new Array<Body>();
+    static Array<Body> bodies = new Array<>();
     public static void parseTiledObjectLayer(World world, MapObjects objects){
         for(MapObject object: objects){
             Shape shape;
