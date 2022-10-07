@@ -1,6 +1,8 @@
 package com.platformer;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -27,6 +29,8 @@ public class Platformer extends Game {
 
 	@Override
 	public void render () {
+
+
 		super.render();
 	}
 

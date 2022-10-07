@@ -1,7 +1,6 @@
 package com.platformer.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,8 +22,8 @@ public class Menu implements Screen {
         exitTex = new Texture("images/exit_a.png");
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        exitButton = new Button(exitTex, new Texture("images/exit_i.png"), w-exitTex.getWidth()-w/8, exitTex.getHeight()+h/8, game);
-        playButton =  new Button(playTex, new Texture("images/play_i.png"), w-playTex.getWidth()-w/8, h-playTex.getHeight()-h/8, game);
+        exitButton = new Button(exitTex, new Texture("images/exit_i.png"), w-exitTex.getWidth()-w/8, exitTex.getHeight()+h/8, 300, 100, game);
+        playButton =  new Button(playTex, new Texture("images/play_i.png"), w-playTex.getWidth()-w/8, h-playTex.getHeight()-h/8, 152, 52, game);
 
 
     }
@@ -41,7 +40,12 @@ public class Menu implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         exitButton.drawButton();
         playButton.drawButton();
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
+        if (exitButton.checkCollision() && Gdx.input.isTouched()){
+            Gdx.app.exit();
+        }
+        if (playButton.checkCollision() && Gdx.input.isTouched()){
+            game.setScreen(new GameScreen(game));
+        }
     }
 
     @Override

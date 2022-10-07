@@ -7,27 +7,21 @@ import com.platformer.Platformer;
 
 public class Button {
     private Texture active, inactive;
-    private Vector2 position, endPosition;
+    private Vector2 position;
+    int sizeW, sizeH;
     Platformer game;
-    public Button(Texture active, Texture inactive, float x, float y, Platformer game){
+    public Button(Texture active, Texture inactive, float x, float y, int sizeW, int sizeH, Platformer game){
         this.game=game;
         this.active=active;
         this.inactive = inactive;
         position = new Vector2(x, y);
-        endPosition = new Vector2(x+active.getWidth(), y-active.getHeight());
-    }
-    /*
-    public Vector2 getPos(){
-        return position;
-    }
-    public Vector2 getEndPos(){
-        return endPosition;
+        this.sizeW = sizeW;
+        this.sizeH = sizeH;
     }
 
-     */
     public boolean checkCollision(){
-        if(Gdx.input.getX()<=endPosition.x && Gdx.input.getX()>=position.x && Gdx.input.getY()<=position.y && Gdx.input.getY()>=endPosition.y){
-        //if (Gdx.input.getX()>=1000 && Gdx.input.getY()<=500) {
+        if(Gdx.input.getX()<=position.x + sizeW && Gdx.input.getX()>=position.x && Gdx.input.getY()<=Gdx.graphics.getHeight() - position.y && Gdx.input.getY()>= Gdx.graphics.getHeight() - sizeH -position.y){
+
             return true;
         }
         return false;
@@ -35,9 +29,9 @@ public class Button {
     public void drawButton(){
         game.batch.begin();
         if (this.checkCollision()){
-            game.batch.draw(active, position.x, position.y);
+            game.batch.draw(active, position.x, position.y, sizeW+20, sizeH+20);
         } else {
-            game.batch.draw(inactive, position.x, position.y);
+            game.batch.draw(inactive, position.x, position.y, sizeW, sizeH);
         }
         game.batch.end();
     }

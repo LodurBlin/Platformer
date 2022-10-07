@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
 
         tmr.render();
         b2dr.render(world, camera.combined.scl(PPM));
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
     }
 
     @Override
