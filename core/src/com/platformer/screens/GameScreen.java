@@ -22,16 +22,16 @@ import static com.platformer.utils.Constants.PPM;
 
 public class GameScreen implements Screen {
     Platformer game;
-    private boolean DEBUG = false;
+    //private boolean DEBUG = false;
     private final float SCALE = 2.0f;
-    private OrthographicCamera camera;
-    private Box2DDebugRenderer b2dr;
+    private final OrthographicCamera camera;
+    private final Box2DDebugRenderer b2dr;
 
-    private World world; //laws of physics
+    private final World world; //laws of physics
     private Body player;
     private Texture ggTex;
 
-    private OrthogonalTiledMapRenderer tmr;
+    private final OrthogonalTiledMapRenderer tmr;
     private TiledMap map;
 
     public GameScreen(Platformer game){

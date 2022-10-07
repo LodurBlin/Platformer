@@ -20,11 +20,7 @@ public class Button {
     }
 
     public boolean checkCollision(){
-        if(Gdx.input.getX()<=position.x + sizeW && Gdx.input.getX()>=position.x && Gdx.input.getY()<=Gdx.graphics.getHeight() - position.y && Gdx.input.getY()>= Gdx.graphics.getHeight() - sizeH -position.y){
-
-            return true;
-        }
-        return false;
+        return Gdx.input.getX() <= position.x + sizeW && Gdx.input.getX() >= position.x && Gdx.input.getY() <= Gdx.graphics.getHeight() - position.y && Gdx.input.getY() >= Gdx.graphics.getHeight() - sizeH - position.y;
     }
     public void drawButton(){
         game.batch.begin();
