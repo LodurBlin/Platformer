@@ -16,9 +16,9 @@ public class Menu implements Screen {
         this.game = game;
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        int wExit = 300, hExit = 100, wPlay = 152, hPlay = 52;
+        int wExit = 132, hExit = 52, wPlay = 264, hPlay = 104;
         exitButton = new Button(new Texture("images/exit_a.png"), new Texture("images/exit_i.png"), w-wExit-w/8, hExit+h/8, wExit, hExit, game);
-        playButton =  new Button(new Texture("images/play_a.png"), new Texture("images/play_i.png"), w-wPlay-w/8, h-hPlay-h/8, wPlay, hPlay, game);
+        playButton =  new Button(new Texture("images/play_a.png"), new Texture("images/play_i.png"), w-wPlay-w/2, h-hPlay-h/2, wPlay, hPlay, game);
 
 
     }

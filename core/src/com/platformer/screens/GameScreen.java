@@ -14,6 +14,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.platformer.Platformer;
 import com.platformer.utils.Controls;
 import com.platformer.utils.TiledObjects;
@@ -23,11 +26,12 @@ import static com.platformer.utils.Constants.PPM;
 public class GameScreen implements Screen {
     Platformer game;
     //private boolean DEBUG = false;
-    private final float SCALE = 2.0f;
-    private final OrthographicCamera camera;
-    private final Box2DDebugRenderer b2dr;
+    private float SCALE = 2.0f;
+    private OrthographicCamera camera;
+    private Viewport gamePort;
+    private Box2DDebugRenderer b2dr;
 
-    private final World world; //laws of physics
+    private World world; //laws of physics
     private Body player;
     private Texture ggTex;
 
@@ -39,8 +43,9 @@ public class GameScreen implements Screen {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
+        gamePort = new ScreenViewport(camera); // работает не так как должно(
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, (w/SCALE), (h/SCALE));
+        camera.setToOrtho(false); //, (w/SCALE), (h/SCALE)
         world = new World(new Vector2(0, -9.8f), false);
         b2dr = new Box2DDebugRenderer();
 
