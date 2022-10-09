@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
 
 public class Controls {
+    public static int jumpNumber = 0;
     public static void inputUpdate(float delta, Body player){
         int horizontalForce = 0;
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
@@ -13,9 +14,13 @@ public class Controls {
         if (Gdx.input.isKeyPressed(Input.Keys.D)){
             horizontalForce +=1;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
-            player.applyForceToCenter(0, 700, false);
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+            if(jumpNumber < 2) {
+                player.applyForceToCenter(0, 700, false);
+                jumpNumber++;
+            }
         }
+        if(player.getLinearVelocity().y == 0) jumpNumber = 0;
         player.setLinearVelocity(horizontalForce *400*delta, player.getLinearVelocity().y);
     }
 }
