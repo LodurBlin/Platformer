@@ -25,7 +25,7 @@ public class Button {
     public void drawButton(){
         game.batch.begin();
         if (this.checkCollision()){
-            game.batch.draw(active, position.x, position.y, sizeW+20, sizeH+20);
+            game.batch.draw(active, position.x, position.y, sizeW+10, sizeH+10);
         } else {
             game.batch.draw(inactive, position.x, position.y, sizeW, sizeH);
         }

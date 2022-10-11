@@ -17,8 +17,8 @@ public class Menu implements Screen {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         int wExit = 132, hExit = 52, wPlay = 264, hPlay = 104;
-        exitButton = new Button(new Texture("images/exit_a.png"), new Texture("images/exit_i.png"), w-wExit-w/8, hExit+h/8, wExit, hExit, game);
-        playButton =  new Button(new Texture("images/play_a.png"), new Texture("images/play_i.png"), w-wPlay-w/2, h-hPlay-h/2, wPlay, hPlay, game);
+        exitButton = new Button(new Texture("images/exit1.png"), new Texture("images/exit0.png"), w-wExit-w/8, hExit+h/8, wExit, hExit, game);
+        playButton =  new Button(new Texture("images/play1.png"), new Texture("images/play0.png"), w-wPlay-w/2, (float) (h-hPlay-h/2.5), wPlay, hPlay, game);
 
 
     }
@@ -31,7 +31,7 @@ public class Menu implements Screen {
     @Override
     public void render(float delta) {
 
-        ScreenUtils.clear(Color.BLACK);
+        ScreenUtils.clear(Color.MAROON);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         exitButton.drawButton();
         playButton.drawButton();

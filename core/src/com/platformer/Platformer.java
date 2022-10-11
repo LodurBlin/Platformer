@@ -1,16 +1,10 @@
 package com.platformer;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
-
-import com.badlogic.gdx.physics.box2d.*;
 
 import com.platformer.screens.Menu;
-import com.platformer.utils.Controls;
 
 public class Platformer extends Game {
 

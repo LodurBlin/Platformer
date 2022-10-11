@@ -49,12 +49,13 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, -9.8f), false);
         b2dr = new Box2DDebugRenderer();
 
-        player = createBox(90, 110, 48, 48, false);
-        ggTex = new Texture("images/floppa.png");
+        player = createBox(90, 500, 48, 138, false);
+        ggTex = new Texture("images/gg (2).png");
 
-        map = new TmxMapLoader().load("maps/level1.tmx");
+        map = new TmxMapLoader().load("maps/level0.tmx");
         tmr = new OrthogonalTiledMapRenderer(map);
-        TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("Object Layer 1").getObjects());
+        TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("surface").getObjects());
+        TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("obstacles").getObjects());
     }
     @Override
     public void show() {
@@ -64,7 +65,7 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         update(Gdx.graphics.getDeltaTime()); //delta позволяет с одинаковой скоростью двигаться при разных fps
         //правда на вертикальной оси у меня не получилось ее заставить работать
-        ScreenUtils.clear(Color.BLACK);
+        ScreenUtils.clear(Color.WHITE);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();

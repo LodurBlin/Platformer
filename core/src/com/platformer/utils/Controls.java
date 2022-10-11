@@ -15,8 +15,12 @@ public class Controls {
             horizontalForce +=1;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            if(jumpNumber < 2) {
-                player.applyForceToCenter(0, 600, false);
+            if(jumpNumber == 0 ) {
+                player.applyForceToCenter(0, 4000, false);
+                jumpNumber++;
+            }
+            else if(jumpNumber == 1 ) {
+                player.applyForceToCenter(0, 500, false);
                 jumpNumber++;
             }
         }
