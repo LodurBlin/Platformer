@@ -31,7 +31,7 @@ public class Menu implements Screen {
     @Override
     public void render(float delta) {
 
-        ScreenUtils.clear(Color.MAROON);
+        ScreenUtils.clear(Color.SKY);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         exitButton.drawButton();
         playButton.drawButton();

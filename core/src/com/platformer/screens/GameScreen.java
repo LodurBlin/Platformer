@@ -51,9 +51,10 @@ public class GameScreen implements Screen {
 
 
         map = new TmxMapLoader().load("maps/level0.tmx");
-        tmr = new OrthogonalTiledMapRenderer(map);
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("surface").getObjects());
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("obstacles").getObjects());
+        tmr = new OrthogonalTiledMapRenderer(map);
+
     }
     @Override
     public void show() {
