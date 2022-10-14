@@ -95,6 +95,7 @@ public class GameScreen implements Screen {
         b2dr.dispose();
         tiledMapRenderer.dispose();
         map.dispose();
+        player.dispose();
 
     }
     public void update(float delta){
