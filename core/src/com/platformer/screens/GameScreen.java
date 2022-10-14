@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.platformer.Platformer;
@@ -35,15 +33,14 @@ public class GameScreen implements Screen {
     private World world; //laws of physics
     private Player player;
 
-    private final OrthogonalTiledMapRenderer tmr;
+    private final OrthogonalTiledMapRenderer tiledMapRenderer;
     private TiledMap map;
-
     public GameScreen(Platformer game){
         this.game=game;
         camera = new OrthographicCamera();
         gamePort = new ScreenViewport(camera); // работает не так как должно(
 
-        //camera.setToOrtho(false);
+        camera.setToOrtho(false);
         world = new World(new Vector2(0, -9.8f), false);
         b2dr = new Box2DDebugRenderer();
 
@@ -53,7 +50,7 @@ public class GameScreen implements Screen {
         map = new TmxMapLoader().load("maps/level0.tmx");
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("surface").getObjects());
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("obstacles").getObjects());
-        tmr = new OrthogonalTiledMapRenderer(map);
+        tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
     }
     @Override
@@ -64,11 +61,12 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         update(Gdx.graphics.getDeltaTime()); //delta позволяет с одинаковой скоростью двигаться при разных fps
         //правда на вертикальной оси у меня не получилось ее заставить работать
-        ScreenUtils.clear(Color.WHITE);
+        ScreenUtils.clear(Color.SKY);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(camera.combined);
         player.drawPlayer();
-        tmr.render();
+
+        tiledMapRenderer.render();
         b2dr.render(world, camera.combined.scl(PPM));
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
     }
@@ -95,15 +93,16 @@ public class GameScreen implements Screen {
     public void dispose() {
         world.dispose();
         b2dr.dispose();
-        tmr.dispose();
+        tiledMapRenderer.dispose();
         map.dispose();
+
     }
     public void update(float delta){
         //handleInput(delta);
         world.step(1/60f, 6, 2);
         Controls.inputUpdate(delta, player);
         cameraUpdate(delta);
-        tmr.setView(camera);
+        tiledMapRenderer.setView(camera);
 
     }
 

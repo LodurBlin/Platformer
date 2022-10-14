@@ -63,7 +63,9 @@ public class Menu implements Screen {
 
     @Override
     public void dispose() {
-
+        exitButton.dispose();
+        playButton.dispose();
+        game.dispose();
     }
 
 }

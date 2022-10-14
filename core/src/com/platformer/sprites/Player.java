@@ -18,8 +18,8 @@ public class Player extends Sprite{
         this.game = game;
         tex = new Texture("images/gg (2).png");
         definePlayer(x, y);
-        width = (int) (tex.getWidth()/PPM);
-        height = (int) (tex.getHeight()/ PPM);
+        width = tex.getWidth(); //in pixels
+        height = tex.getHeight();
     }
 
 
@@ -27,7 +27,7 @@ public class Player extends Sprite{
         BodyDef bdef = new BodyDef();
         bdef.position.set(x/PPM, y/PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
-        //bdef.fixedRotation = true; //false - rotate when hitting objects
+        bdef.fixedRotation = true; //false - rotate when hitting objects
         body = world.createBody(bdef); //initialisation
 
         FixtureDef fdef = new FixtureDef();
@@ -43,7 +43,11 @@ public class Player extends Sprite{
         game.batch.draw(tex, body.getPosition().x/PPM, body.getPosition().y/PPM);
         game.batch.end();
     }
-
+    public void dispose() {
+        tex.dispose();
+        world.dispose();
+        game.dispose();
+    }
 
 
 }

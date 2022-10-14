@@ -31,6 +31,10 @@ public class Button {
         }
         game.batch.end();
     }
-
+    public void dispose() {
+        active.dispose();
+        inactive.dispose();
+        game.dispose();
+    }
 
 }
