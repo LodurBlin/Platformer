@@ -41,7 +41,7 @@ public class Player extends Sprite{
     }
     public void drawPlayer(){
         game.batch.begin();
-        game.batch.draw(tex, body.getPosition().x*PPM, body.getPosition().y*PPM);
+        game.batch.draw(tex, body.getPosition().x*PPM - width/2, body.getPosition().y*PPM);
         game.batch.end();
     }
     public void dispose() {
