@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.platformer.Platformer;
-import com.platformer.utils.Button;
+import com.platformer.sprites.Button;
 
 public class Menu implements Screen {
     Platformer game;

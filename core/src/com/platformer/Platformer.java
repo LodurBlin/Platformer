@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.platformer.screens.GameScreen;
 import com.platformer.screens.Menu;
 
 public class Platformer extends Game {

@@ -1,4 +1,4 @@
-package com.platformer.utils;
+package com.platformer.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,5 +31,6 @@ public class Button {
         }
         game.batch.end();
     }
+
 
 }

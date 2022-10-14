@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.platformer.Platformer;
+import com.platformer.sprites.Player;
 import com.platformer.utils.Controls;
 import com.platformer.utils.TiledObjects;
 
@@ -32,25 +33,22 @@ public class GameScreen implements Screen {
     private Box2DDebugRenderer b2dr;
 
     private World world; //laws of physics
-    private Body player;
-    private Texture ggTex;
+    private Player player;
 
     private final OrthogonalTiledMapRenderer tmr;
     private TiledMap map;
 
     public GameScreen(Platformer game){
         this.game=game;
-        float w = Gdx.graphics.getWidth();
-        float h = Gdx.graphics.getHeight();
-
-        gamePort = new ScreenViewport(camera); // работает не так как должно(
         camera = new OrthographicCamera();
-        camera.setToOrtho(false); //, (w/SCALE), (h/SCALE)
+        gamePort = new ScreenViewport(camera); // работает не так как должно(
+
+        //camera.setToOrtho(false);
         world = new World(new Vector2(0, -9.8f), false);
         b2dr = new Box2DDebugRenderer();
 
-        player = createBox(90, 500, 48, 138, false);
-        ggTex = new Texture("images/gg (2).png");
+        player = new Player(world, 399, 800, game);
+
 
         map = new TmxMapLoader().load("maps/level0.tmx");
         tmr = new OrthogonalTiledMapRenderer(map);
@@ -67,12 +65,8 @@ public class GameScreen implements Screen {
         //правда на вертикальной оси у меня не получилось ее заставить работать
         ScreenUtils.clear(Color.WHITE);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        game.batch.begin();
-
-        game.batch.draw(ggTex, player.getPosition().x/PPM + Gdx.graphics.getWidth()/2 - ggTex.getWidth()/2, player.getPosition().y/PPM + Gdx.graphics.getHeight()/2- ggTex.getHeight()/2);
-        game.batch.end();
-
+        game.batch.setProjectionMatrix(camera.combined);
+        player.drawPlayer();
         tmr.render();
         b2dr.render(world, camera.combined.scl(PPM));
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
@@ -80,7 +74,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        camera.setToOrtho(false, width/SCALE, height/SCALE);
+        camera.setToOrtho(false, width, height);
+        gamePort.update(width, height);
     }
 
     @Override
@@ -99,45 +94,23 @@ public class GameScreen implements Screen {
     public void dispose() {
         world.dispose();
         b2dr.dispose();
-        ggTex.dispose();
         tmr.dispose();
         map.dispose();
     }
     public void update(float delta){
+        //handleInput(delta);
         world.step(1/60f, 6, 2);
         Controls.inputUpdate(delta, player);
         cameraUpdate(delta);
         tmr.setView(camera);
-        //batch.setProjectionMatrix(camera.combined); //Оно ломает текстуру и по идее это resize
+
     }
 
     public void cameraUpdate(float delta){
         Vector3 position = camera.position;
-        position.x = player.getPosition().x * PPM; //get info
-        position.y = player.getPosition().y * PPM;
+        camera.position.x = player.body.getPosition().x*PPM;
+        camera.position.y = player.body.getPosition().y*PPM;//get info
         camera.position.set(position);
         camera.update();
-    }
-    public Body createBox(int x, int y, int width, int height, boolean isStatic){
-        Body pBody;
-        BodyDef def = new BodyDef();
-        if (isStatic){
-            def.type = BodyDef.BodyType.StaticBody;
-        }
-        else{
-            def.type = BodyDef.BodyType.DynamicBody;
-        }
-
-        def.position.set(x/PPM, y/PPM);
-        def.fixedRotation = true; //false - rotate when hitting objects
-        pBody = world.createBody(def); //initialisation
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width/ SCALE / PPM, height / SCALE / PPM); //counts from center, put info
-
-        pBody.createFixture(shape, 1.0f);
-        shape.dispose(); //cleaning
-
-        return pBody;
     }
 }
