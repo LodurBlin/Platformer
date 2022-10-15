@@ -41,7 +41,7 @@ public class GameScreen implements Screen {
         gamePort = new ScreenViewport(camera); // работает не так как должно(
 
         camera.setToOrtho(false);
-        world = new World(new Vector2(0, -9.8f), false);
+        world = new World(new Vector2(0, -20f), false);
         b2dr = new Box2DDebugRenderer();
 
         player = new Player(world, 399, 800, game);

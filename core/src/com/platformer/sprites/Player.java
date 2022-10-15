@@ -17,7 +17,7 @@ public class Player extends Sprite{
     public Player(World world, int x, int y, Platformer game){
         this.world = world;
         this.game = game;
-        tex = new Texture("images/gg (2).png");
+        tex = new Texture("images/Nick.png");
         definePlayer(x, y);
         width = tex.getWidth(); //in pixels
         height = tex.getHeight();
