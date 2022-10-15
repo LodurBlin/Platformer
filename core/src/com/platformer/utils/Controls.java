@@ -7,24 +7,39 @@ import com.platformer.sprites.Player;
 public class Controls {
     public static int jumpNumber = 0;
     public static void inputUpdate(float delta, Player player){
-        int horizontalForce = 0;
-        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            horizontalForce -=1;
+        int horizontalVector = 0;
+        float verticalVector = 0;
+        boolean up = Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP);
+        boolean left = Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT);
+        boolean right = Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT);
+        float horizontalForce = 400*delta;
+        float verticalForce = 400;
+        if (left){
+            horizontalVector -=1;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            horizontalForce +=1;
+        if (right){
+            horizontalVector +=1;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            if(jumpNumber == 0 ) {
-                player.body.applyForceToCenter(0, 400, false);
+        if (up){
+            if(jumpNumber == 0) {
+                verticalVector = 1;
                 jumpNumber++;
             }
             else if(jumpNumber == 1 ) {
-                player.body.applyForceToCenter(0, 50, false);
+                verticalVector = 1/8;
                 jumpNumber++;
             }
+            if (left && !right){
+                horizontalVector = -1;
+            } else if (right && !left){
+                horizontalVector = 1;
+            }
+            player.body.applyForceToCenter(horizontalVector * horizontalForce, verticalForce * verticalVector, false);
+        }
+        else {
+            player.body.setLinearVelocity(horizontalVector * horizontalForce, player.body.getLinearVelocity().y);
         }
         if(player.body.getLinearVelocity().y == 0) jumpNumber = 0;
-        player.body.setLinearVelocity(horizontalForce *400*delta, player.body.getLinearVelocity().y);
+
     }
 }

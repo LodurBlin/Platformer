@@ -39,8 +39,9 @@ public class GameScreen implements Screen {
         this.game=game;
         camera = new OrthographicCamera();
         gamePort = new ScreenViewport(camera); // работает не так как должно(
-
         camera.setToOrtho(false);
+        camera.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
+
         world = new World(new Vector2(0, -20f), false);
         b2dr = new Box2DDebugRenderer();
 
@@ -108,9 +109,12 @@ public class GameScreen implements Screen {
     }
 
     public void cameraUpdate(float delta){
+
+        if (Gdx.input.isTouched()){
+            camera.position.x+=100*delta;
+        }
         Vector3 position = camera.position;
-        camera.position.x = player.body.getPosition().x*PPM;
-        camera.position.y = player.body.getPosition().y*PPM;//get info
+        camera.position.x = player.body.getPosition().x*PPM;//get info
         camera.position.set(position);
         camera.update();
     }
