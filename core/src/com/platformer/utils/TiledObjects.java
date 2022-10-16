@@ -47,7 +47,7 @@ public class TiledObjects {
         Rectangle rectangle = object.getRectangle();
         PolygonShape ps = new PolygonShape();
         Vector2 size = new Vector2((rectangle.x+ rectangle.width * 0.5f)/PPM, (rectangle.y+rectangle.height * 0.5f)/PPM);
-        ps.setAsBox(rectangle.width * 0.5f/PPM, rectangle.height * 0.5f/PPM, size, 0.0f);
+        ps.setAsBox(rectangle.getWidth() * 0.5f/PPM, rectangle.getHeight() * 0.5f/PPM, size, 0.0f);
         return ps;
     }
 }

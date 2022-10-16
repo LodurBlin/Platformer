@@ -17,14 +17,14 @@ public class Player extends Sprite{
     public Player(World world, int x, int y, Platformer game){
         this.world = world;
         this.game = game;
-        tex = new Texture("images/Nick.png");
+        tex = new Texture("images/Nick.png"); //32x102
         definePlayer(x, y);
         width = tex.getWidth(); //in pixels
         height = tex.getHeight();
     }
 
 
-    public void definePlayer(int x, int y){
+    private void definePlayer(int x, int y){
         BodyDef bdef = new BodyDef();
         bdef.position.set(x/PPM, y/PPM); //put info
         bdef.type = BodyDef.BodyType.DynamicBody;
