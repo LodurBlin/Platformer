@@ -13,14 +13,14 @@ public class Player extends Sprite{
     public Body body;
     public Texture tex;
     Platformer game;
-    int width, height;
+    float width, height;
     public Player(World world, int x, int y, Platformer game){
         this.world = world;
         this.game = game;
         tex = new Texture("images/Nick.png"); //32x102
+        width = tex.getWidth()/2;
+        height = tex.getHeight()/2;
         definePlayer(x, y);
-        width = tex.getWidth(); //in pixels
-        height = tex.getHeight();
     }
 
 
@@ -31,9 +31,9 @@ public class Player extends Sprite{
         bdef.fixedRotation = true; //false - rotate when hitting objects
         body = world.createBody(bdef); //initialisation
 
-        FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox( width/2, height/2); //counts from center
+        FixtureDef fdef = new FixtureDef();
+        shape.setAsBox( width/PPM, height/PPM); //counts from center
         fdef.shape=shape;
 
         body.createFixture(fdef);
@@ -41,7 +41,7 @@ public class Player extends Sprite{
     }
     public void drawPlayer(){
         game.batch.begin();
-        game.batch.draw(tex, body.getPosition().x*PPM - width/2, body.getPosition().y*PPM);
+        game.batch.draw(tex, body.getPosition().x*PPM - width, body.getPosition().y*PPM - height);
         game.batch.end();
     }
     public void dispose() {

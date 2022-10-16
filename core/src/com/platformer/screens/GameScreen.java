@@ -114,6 +114,7 @@ public class GameScreen implements Screen {
         }
         Vector3 position = camera.position;
         camera.position.x = player.body.getPosition().x*PPM;//get info
+        camera.position.y = player.body.getPosition().y*PPM;
         camera.position.set(position);
         camera.update();
     }
