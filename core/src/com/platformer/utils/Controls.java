@@ -9,10 +9,10 @@ public class Controls {
     public static void inputUpdate(float delta, Player player){
         int horizontalVector = 0;
         float verticalVector = 0;
-        boolean up = Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.UP);
+        boolean up = Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.UP);
         boolean left = Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT);
         boolean right = Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT);
-        float horizontalForce = 400*delta;
+        float horizontalForce = 500*delta;
         float verticalForce = 400;
         if (left){
             horizontalVector -=1;

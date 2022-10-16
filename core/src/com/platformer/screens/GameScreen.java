@@ -3,6 +3,7 @@ package com.platformer.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -35,6 +36,7 @@ public class GameScreen implements Screen {
 
     private final OrthogonalTiledMapRenderer tiledMapRenderer;
     private TiledMap map;
+    private Music music;
     public GameScreen(Platformer game){
         this.game=game;
         camera = new OrthographicCamera();
@@ -47,9 +49,13 @@ public class GameScreen implements Screen {
 
         player = new Player(world, 399, 800, game);
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
+        music.setLooping(true);
+        music.play();
 
         map = new TmxMapLoader().load("maps/level0.tmx");
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("surface").getObjects());
+        TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("text").getObjects());
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("obstacles").getObjects());
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
