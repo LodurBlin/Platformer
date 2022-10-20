@@ -7,12 +7,14 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,7 +28,6 @@ import static com.platformer.utils.Constants.PPM;
 public class GameScreen implements Screen {
     Platformer game;
     //private boolean DEBUG = false;
-    private float SCALE = 2.0f;
     private OrthographicCamera camera;
     private Viewport gamePort;
     private Box2DDebugRenderer b2dr;
@@ -37,9 +38,11 @@ public class GameScreen implements Screen {
     private final OrthogonalTiledMapRenderer tiledMapRenderer;
     private TiledMap map;
     private Music music;
+    private TextureAtlas atlas;
     public GameScreen(Platformer game){
         this.game=game;
         camera = new OrthographicCamera();
+
         gamePort = new ScreenViewport(camera); // работает не так как должно(
         camera.setToOrtho(false);
         camera.position.set(gamePort.getScreenWidth()/2, gamePort.getScreenHeight()/2, 0);
@@ -47,12 +50,13 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, -20f), false);
         b2dr = new Box2DDebugRenderer();
 
-        player = new Player(world, 399, 800, game);
+        player = new Player(world, 399, 800, game, this);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
         music.play();
 
+        atlas = new TextureAtlas("Nick.pack");
         map = new TmxMapLoader().load("maps/level0.tmx");
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("surface").getObjects());
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("text").getObjects());
@@ -60,6 +64,17 @@ public class GameScreen implements Screen {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
 
     }
+
+    public TextureAtlas getAtlas() {
+        if (atlas!= null){
+            return atlas;
+        } else{
+            System.out.println("FUCK");
+            return null;
+        }
+
+    }
+
     @Override
     public void show() {
     }
@@ -71,7 +86,9 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(Color.SKY);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(camera.combined);
-        player.drawPlayer();
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
 
         tiledMapRenderer.render();
         b2dr.render(world, camera.combined.scl(PPM));

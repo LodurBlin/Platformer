@@ -2,25 +2,51 @@ package com.platformer.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.platformer.Platformer;
+import com.platformer.screens.GameScreen;
 
 import static com.platformer.utils.Constants.PPM;
 
 public class Player extends Sprite{
     public World world;
     public Body body;
-    public Texture tex;
+    //public Texture tex;
+    public enum State {FALLING, JUMPING, STANDING, RUNNING};
+    public State currentState, previousState;
     Platformer game;
     float width, height;
-    public Player(World world, int x, int y, Platformer game){
+    private Animation nickRun, nickJump;
+    private boolean runningRight;
+    private float stateTimer;
+    private TextureRegion nickStand;
+    public Player(World world, int x, int y, Platformer game, GameScreen screen){
+        super(screen.getAtlas().findRegion("Nick Names"));
         this.world = world;
         this.game = game;
-        tex = new Texture("images/Nick.png"); //32x102
-        width = tex.getWidth()/2;
-        height = tex.getHeight()/2;
+        //tex = new Texture("images/Nick.png"); //32x102
+        width = 32;
+        height = 92;
         definePlayer(x, y);
+        stateTimer = 0;
+        runningRight = true;
+        currentState = previousState = State.STANDING;
+
+        nickStand = new TextureRegion(getTexture(), 189, 1, width, height);
+        setBounds(x, y, width/PPM, height/PPM);
+        setRegion(nickStand);
+        /*
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        for (int i=1; i<4; i++){
+            frames.add(new TextureRegion(getTexture(), i*32, 0, width, height);
+        }
+        nickRun = new Animation(0.1f, frames);
+
+         */
     }
 
 
@@ -33,19 +59,15 @@ public class Player extends Sprite{
 
         PolygonShape shape = new PolygonShape();
         FixtureDef fdef = new FixtureDef();
-        shape.setAsBox( width/PPM, height/PPM); //counts from center
+        shape.setAsBox( width/2/PPM, height/2/PPM); //counts from center
         fdef.shape=shape;
 
         body.createFixture(fdef);
         shape.dispose();
     }
-    public void drawPlayer(){
-        game.batch.begin();
-        game.batch.draw(tex, body.getPosition().x*PPM - width, body.getPosition().y*PPM - height);
-        game.batch.end();
-    }
+
     public void dispose() {
-        tex.dispose();
+        //tex.dispose();
         world.dispose();
         game.dispose();
     }
