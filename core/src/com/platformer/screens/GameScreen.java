@@ -49,14 +49,14 @@ public class GameScreen implements Screen {
 
         world = new World(new Vector2(0, -20f), false);
         b2dr = new Box2DDebugRenderer();
-
+        atlas = new TextureAtlas(Gdx.files.internal("images/Nick.pack"));
         player = new Player(world, 399, 800, game, this);
 
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
         music.play();
 
-        atlas = new TextureAtlas(Gdx.files.internal("test.atlas"));
+
         map = new TmxMapLoader().load("maps/level0.tmx");
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("surface").getObjects());
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("text").getObjects());
@@ -66,12 +66,7 @@ public class GameScreen implements Screen {
     }
 
     public TextureAtlas getAtlas() {
-        if (atlas!= null){
-            return atlas;
-        } else{
-            System.out.println("FUCK");
-            return null;
-        }
+        return atlas;
 
     }
 
