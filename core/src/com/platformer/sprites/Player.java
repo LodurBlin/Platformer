@@ -33,11 +33,11 @@ public class Player extends Sprite{
         height = 92;
         definePlayer(x, y);
         stateTimer = 0;
-        runningRight = true;
+        //runningRight = true;
         currentState = previousState = State.STANDING;
 
         nickStand = new TextureRegion(getTexture(), 189, 1, width, height);
-        setBounds(x, y, width/PPM, height/PPM);
+        setBounds(x/PPM, y/PPM, width/PPM, height/PPM);
         setRegion(nickStand);
         /*
         Array<TextureRegion> frames = new Array<TextureRegion>();
@@ -66,6 +66,10 @@ public class Player extends Sprite{
         shape.dispose();
     }
 
+    public void update(float delta){
+        setPosition(body.getPosition().x - getWidth()/2, body.getPosition().y - getHeight()/2);
+
+    }
     public void dispose() {
         //tex.dispose();
         world.dispose();

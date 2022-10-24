@@ -118,6 +118,7 @@ public class GameScreen implements Screen {
 
     }
     public void update(float delta){
+        player.update(delta);
         world.step(1/60f, 6, 2);
         Controls.inputUpdate(delta, player);
         cameraUpdate(delta);
