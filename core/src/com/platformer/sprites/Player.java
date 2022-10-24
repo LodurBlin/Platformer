@@ -74,6 +74,7 @@ public class Player extends Sprite{
         //tex.dispose();
         world.dispose();
         game.dispose();
+
     }
 
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -39,6 +40,7 @@ public class GameScreen implements Screen {
     private TiledMap map;
     private Music music;
     private TextureAtlas atlas;
+    private Sprite pl;
     public GameScreen(Platformer game){
         this.game=game;
         camera = new OrthographicCamera();
@@ -51,7 +53,7 @@ public class GameScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         atlas = new TextureAtlas(Gdx.files.internal("images/Nick.pack"));
         player = new Player(world, 399, 800, game, this);
-
+        pl = atlas.createSprite("Nick Names");
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
         music.play();
@@ -83,6 +85,7 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         player.draw(game.batch);
+        pl.draw(game.batch);
         game.batch.end();
 
         tiledMapRenderer.render();
@@ -115,6 +118,7 @@ public class GameScreen implements Screen {
         tiledMapRenderer.dispose();
         map.dispose();
         player.dispose();
+        atlas.dispose();
 
     }
     public void update(float delta){
