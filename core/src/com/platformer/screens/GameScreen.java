@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, -20f), false);
         b2dr = new Box2DDebugRenderer();
         atlas = new TextureAtlas(Gdx.files.internal("images/Nick.pack"));
-        player = new Player(world, 399, 800, game, this);
+        player = new Player(world, 399, 800,this);
         pl = atlas.createSprite("Nick Names");
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
@@ -89,7 +89,7 @@ public class GameScreen implements Screen {
         game.batch.end();
 
         tiledMapRenderer.render();
-        b2dr.render(world, camera.combined.scl(PPM));
+        b2dr.render(world, camera.combined.scl(PPM)); //Отвечает за зелененькие линии
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) Gdx.app.exit();
     }
 

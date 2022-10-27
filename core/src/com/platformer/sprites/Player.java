@@ -18,27 +18,25 @@ public class Player extends Sprite{
     //public Texture tex;
     public enum State {FALLING, JUMPING, STANDING, RUNNING};
     public State currentState, previousState;
-    Platformer game;
-    float width, height;
+    private float width, height;
     private Animation nickRun, nickJump;
     private boolean runningRight;
     private float stateTimer;
     private TextureRegion nickStand;
-    public Player(World world, int x, int y, Platformer game, GameScreen screen){
+    public Player(World world, int x, int y, GameScreen screen){
         super(screen.getAtlas().findRegion("Nick Names"));
         this.world = world;
-        this.game = game;
         //tex = new Texture("images/Nick.png"); //32x102
-        width = 32;
-        height = 92;
+        this.width = 32;
+        this.height = 92;
         definePlayer(x, y);
-        stateTimer = 0;
+        this.stateTimer = 0;
         //runningRight = true;
         currentState = previousState = State.STANDING;
 
         nickStand = new TextureRegion(getTexture(), 189, 1, width, height);
-        setBounds(x/PPM, y/PPM, width/PPM, height/PPM);
-        setRegion(nickStand);
+        super.setBounds(x/PPM, y/PPM, width/PPM, height/PPM);
+        super.setRegion(nickStand);
         /*
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i=1; i<4; i++){
@@ -73,8 +71,6 @@ public class Player extends Sprite{
     public void dispose() {
         //tex.dispose();
         world.dispose();
-        game.dispose();
-
     }
 
 
