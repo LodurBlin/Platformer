@@ -12,8 +12,9 @@ public class Controls {
         boolean up = Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.UP);
         boolean left = Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT);
         boolean right = Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT);
-        float horizontalForce = 500*delta;
-        float verticalForce = 400;
+        float verticalForce = 500;
+        float horizontalForce = (verticalForce+100)*delta;
+
         if (left){
             horizontalVector -=1;
         }

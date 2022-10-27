@@ -1,13 +1,9 @@
 package com.platformer.sprites;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
-import com.platformer.Platformer;
 import com.platformer.screens.GameScreen;
 
 import static com.platformer.utils.Constants.PPM;
@@ -30,11 +26,11 @@ public class Player extends Sprite{
         this.width = 32;
         this.height = 92;
         definePlayer(x, y);
-        this.stateTimer = 0;
+        //this.stateTimer = 0;
         //runningRight = true;
-        currentState = previousState = State.STANDING;
+        //currentState = previousState = State.STANDING;
 
-        nickStand = new TextureRegion(getTexture(), 189, 1, width, height);
+        nickStand = new TextureRegion(super.getTexture(), 189, 1, width, height);
         super.setBounds(x/PPM, y/PPM, width/PPM, height/PPM);
         super.setRegion(nickStand);
         /*
@@ -65,7 +61,7 @@ public class Player extends Sprite{
     }
 
     public void update(float delta){
-        setPosition(body.getPosition().x - getWidth()/2, body.getPosition().y - getHeight()/2);
+        super.setPosition(body.getPosition().x - super.getWidth()/2, body.getPosition().y - super.getHeight()/2);
 
     }
     public void dispose() {

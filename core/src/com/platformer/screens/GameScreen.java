@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
     private TiledMap map;
     private Music music;
     private TextureAtlas atlas;
-    private Sprite pl;
+    //private Sprite pl;
     public GameScreen(Platformer game){
         this.game=game;
         camera = new OrthographicCamera();
@@ -53,10 +53,10 @@ public class GameScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         atlas = new TextureAtlas(Gdx.files.internal("images/Nick.pack"));
         player = new Player(world, 399, 800,this);
-        pl = atlas.createSprite("Nick Names");
+        //pl = atlas.createSprite("Nick Names");
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
-        music.play();
+        //music.play();
 
 
         map = new TmxMapLoader().load("maps/level0.tmx");
@@ -85,7 +85,7 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         player.draw(game.batch);
-        pl.draw(game.batch);
+        //pl.draw(game.batch);
         game.batch.end();
 
         tiledMapRenderer.render();
@@ -122,12 +122,11 @@ public class GameScreen implements Screen {
 
     }
     public void update(float delta){
-        player.update(delta);
         world.step(1/60f, 6, 2);
         Controls.inputUpdate(delta, player);
         cameraUpdate(delta);
         tiledMapRenderer.setView(camera);
-
+        player.update(delta);
     }
 
     public void cameraUpdate(float delta){
