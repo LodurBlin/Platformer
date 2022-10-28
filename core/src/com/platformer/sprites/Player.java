@@ -23,15 +23,14 @@ public class Player extends Sprite{
         super(screen.getAtlas().findRegion("Nick Names"));
         this.world = world;
         //tex = new Texture("images/Nick.png"); //32x102
-        this.width = 32;
-        this.height = 92;
+        width = 32;
+        height = 92;
         definePlayer(x, y);
         //this.stateTimer = 0;
         //runningRight = true;
         //currentState = previousState = State.STANDING;
-
         nickStand = new TextureRegion(super.getTexture(), 189, 1, width, height);
-        super.setBounds(x/PPM, y/PPM, width/PPM, height/PPM);
+        super.setBounds(x, y, width, height);
         super.setRegion(nickStand);
         /*
         Array<TextureRegion> frames = new Array<TextureRegion>();
