@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import com.platformer.screens.GameScreen;
 
 import static com.platformer.utils.Constants.PPM;
@@ -12,34 +13,37 @@ public class Player extends Sprite{
     public World world;
     public Body body;
     //public Texture tex;
-    public enum State {FALLING, JUMPING, STANDING, RUNNING};
+    public enum State {FALLING, JUMPING,STANDING, RUNNING};
     public State currentState, previousState;
     private float width, height;
-    private Animation nickRun, nickJump;
+    private Animation nickRun;
     private boolean runningRight;
     private float stateTimer;
-    private TextureRegion nickStand;
+    private TextureRegion nickStand, nickJump;
     public Player(World world, int x, int y, GameScreen screen){
         super(screen.getAtlas().findRegion("Nick Names"));
         this.world = world;
-        //tex = new Texture("images/Nick.png"); //32x102
         width = 32;
         height = 92;
         definePlayer(x, y);
-        //this.stateTimer = 0;
-        //runningRight = true;
-        //currentState = previousState = State.STANDING;
+
+        this.stateTimer = 0;
+        runningRight = true;
+        currentState = previousState = State.STANDING;
+
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        for (int i=1; i<6; i++){
+            frames.add(new TextureRegion(getTexture(), i*31, 2, (int)width, (int)(height-1)));
+        }
+        nickRun = new Animation(0.1f, frames);
+        frames.clear();
+
+        nickJump = new TextureRegion(super.getTexture(), 221, 1, (int)width, (int)height);
+
         nickStand = new TextureRegion(super.getTexture(), 189, 1, (int)width, (int)height);
         super.setBounds(x, y, width, height);
         super.setRegion(nickStand);
-        /*
-        Array<TextureRegion> frames = new Array<TextureRegion>();
-        for (int i=1; i<4; i++){
-            frames.add(new TextureRegion(getTexture(), i*32, 0, width, height);
-        }
-        nickRun = new Animation(0.1f, frames);
 
-         */
     }
 
 
@@ -61,10 +65,58 @@ public class Player extends Sprite{
 
     public void update(float delta){
         setPosition(body.getPosition().x*PPM- width/2, body.getPosition().y*PPM - height/2); //Проблемы в getPosition
-
+        setRegion(getFrame(delta));
     }
+    public State getState(){
+        if (body.getLinearVelocity().y >0) {
+            return State.JUMPING;
+        } else if (body.getLinearVelocity().y <0){
+            return State.FALLING;
+        } else if (body.getLinearVelocity().x !=0){
+            return State.RUNNING;
+        } else {
+            return State.STANDING;
+        }
+    }
+    public TextureRegion getFrame(float delta){
+        currentState = getState();
+        TextureRegion region = null;
+        switch(currentState){
+            case RUNNING:
+                region = (TextureRegion) nickRun.getKeyFrame(stateTimer, true);
+                break;
+            case JUMPING:
+                region = nickJump;
+                if  (region.isFlipY()){
+                    region.flip(false, true);
+                }
+                break;
+            case FALLING:
+                region = nickJump;
+                if (!region.isFlipY()){
+                    region.flip(false, true);
+                }
+                break;
+
+            case STANDING:
+            default:
+                region = nickStand;
+                break;
+        }
+
+        if ((body.getLinearVelocity().x<0 || !runningRight) && !region.isFlipX()){ //отражаем челика при повороте налево
+            region.flip(true, false);
+            runningRight=false;
+        } else if ((body.getLinearVelocity().x>0 || runningRight) && region.isFlipX()){ //отражаем челика при повороте направо
+            region.flip(true, false);
+            runningRight=true;
+        }
+        stateTimer = currentState == previousState ? stateTimer + delta : 0;
+        previousState = currentState;
+        return region;
+    }
+
     public void dispose() {
-        //tex.dispose();
         world.dispose();
     }
 
