@@ -29,7 +29,7 @@ public class Player extends Sprite{
         //this.stateTimer = 0;
         //runningRight = true;
         //currentState = previousState = State.STANDING;
-        nickStand = new TextureRegion(super.getTexture(), 189, 1, width, height);
+        nickStand = new TextureRegion(super.getTexture(), 189, 1, (int)width, (int)height);
         super.setBounds(x, y, width, height);
         super.setRegion(nickStand);
         /*
@@ -45,7 +45,7 @@ public class Player extends Sprite{
 
     private void definePlayer(int x, int y){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(x/PPM, y/PPM); //put info
+        bdef.position.set(x/PPM+width/2/PPM, y/PPM+height/2/PPM); //put info
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.fixedRotation = true; //false - rotate when hitting objects
         body = world.createBody(bdef); //initialisation
@@ -60,7 +60,7 @@ public class Player extends Sprite{
     }
 
     public void update(float delta){
-        super.setPosition(body.getPosition().x - super.getWidth()/2, body.getPosition().y - super.getHeight()/2);
+        setPosition(body.getPosition().x/PPM - width/2/PPM, body.getPosition().y/PPM - height/2/PPM);
 
     }
     public void dispose() {

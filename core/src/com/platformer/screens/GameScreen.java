@@ -40,7 +40,6 @@ public class GameScreen implements Screen {
     private TiledMap map;
     private Music music;
     private TextureAtlas atlas;
-    //private Sprite pl;
     public GameScreen(Platformer game){
         this.game=game;
         camera = new OrthographicCamera();
@@ -53,7 +52,6 @@ public class GameScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
         atlas = new TextureAtlas(Gdx.files.internal("images/Nick.pack"));
         player = new Player(world, 399, 800,this);
-        //pl = atlas.createSprite("Nick Names");
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
         //music.play();
@@ -82,10 +80,11 @@ public class GameScreen implements Screen {
         //правда на вертикальной оси у меня не получилось ее заставить работать
         ScreenUtils.clear(Color.SKY);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         game.batch.setProjectionMatrix(camera.combined);
+
         game.batch.begin();
         player.draw(game.batch);
-        //pl.draw(game.batch);
         game.batch.end();
 
         tiledMapRenderer.render();

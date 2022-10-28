@@ -17,7 +17,7 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="text">
-  <object id="33" x="87.5" y="263.5" width="352" height="46">
+  <object id="33" x="10.1667" y="466.167" width="352" height="46">
    <text fontfamily="Algerian" pixelsize="40" wrap="1" color="#636363">Grimes - Oblivion</text>
   </object>
   <object id="37" x="96" y="704" width="590.333" height="126">
