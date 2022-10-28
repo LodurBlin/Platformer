@@ -60,7 +60,7 @@ public class Player extends Sprite{
     }
 
     public void update(float delta){
-        setPosition(body.getPosition().x/PPM - width/2/PPM, body.getPosition().y/PPM - height/2/PPM);
+        setPosition(body.getPosition().x*PPM- width/2, body.getPosition().y*PPM - height/2); //Проблемы в getPosition
 
     }
     public void dispose() {
