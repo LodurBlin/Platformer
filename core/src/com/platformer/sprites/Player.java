@@ -52,6 +52,7 @@ public class Player extends Sprite{
         bdef.position.set(x/PPM+width/2/PPM, y/PPM+height/2/PPM); //put info
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.fixedRotation = true; //false - rotate when hitting objects
+
         body = world.createBody(bdef); //initialisation
 
         PolygonShape shape = new PolygonShape();

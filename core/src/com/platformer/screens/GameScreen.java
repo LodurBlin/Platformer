@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.platformer.Platformer;
 import com.platformer.sprites.Player;
+import com.platformer.tools.WorldContactListener;
 import com.platformer.utils.Controls;
 import com.platformer.utils.TiledObjects;
 
@@ -62,6 +63,9 @@ public class GameScreen implements Screen {
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("text").getObjects());
         TiledObjects.parseTiledObjectLayer(world, map.getLayers().get("obstacles").getObjects());
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
+
+        //World Contact Listener
+        world.setContactListener(new WorldContactListener());
 
     }
 
