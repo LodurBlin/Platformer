@@ -12,7 +12,7 @@ public class Controls {
         boolean up = Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyJustPressed(Input.Keys.UP);
         boolean left = Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT);
         boolean right = Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT);
-        float verticalForce = 500;
+        float verticalForce = 700;
         float horizontalForce = (verticalForce+100)*delta;
 
         if (left){
@@ -26,8 +26,9 @@ public class Controls {
                 verticalVector = 1;
                 jumpNumber++;
             }
-            else if(jumpNumber == 1 ) {
-                verticalVector = 1/8;
+            else if(jumpNumber == 1 ) { //второй прыжок не получается изменить
+                verticalVector = 0;
+                verticalForce-=500;
                 jumpNumber++;
             }
             if (left && !right){
