@@ -20,9 +20,9 @@ public class Player extends Sprite{
     private boolean runningRight;
     private float stateTimer;
     private TextureRegion nickStand, nickJump;
-    public Player(World world, int x, int y, GameScreen screen){
+    public Player(int x, int y, GameScreen screen){
         super(screen.getAtlas().findRegion("Nick Names"));
-        this.world = world;
+        this.world = screen.getWorld();
         width = 32;
         height = 92;
         definePlayer(x, y);

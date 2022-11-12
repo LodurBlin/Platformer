@@ -15,12 +15,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.platformer.Platformer;
 import com.platformer.sprites.Player;
+import com.platformer.sprites.Pterodactyl;
 import com.platformer.tools.WorldContactListener;
 import com.platformer.utils.Controls;
 import com.platformer.utils.TiledObjects;
@@ -41,6 +41,8 @@ public class GameScreen implements Screen {
     private TiledMap map;
     private Music music;
     private TextureAtlas atlas;
+
+    private Pterodactyl ptero;
     public GameScreen(Platformer game){
         this.game=game;
         camera = new OrthographicCamera();
@@ -52,7 +54,7 @@ public class GameScreen implements Screen {
         world = new World(new Vector2(0, -20f), false);
         b2dr = new Box2DDebugRenderer();
         atlas = new TextureAtlas(Gdx.files.internal("images/Nick.pack"));
-        player = new Player(world, 399, 800,this);
+        player = new Player(399, 800,this);
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
         //music.play();
@@ -67,6 +69,7 @@ public class GameScreen implements Screen {
         //World Contact Listener
         world.setContactListener(new WorldContactListener());
 
+        ptero = new Pterodactyl(this, .32f, .32f);
     }
 
     public TextureAtlas getAtlas() {
@@ -89,6 +92,7 @@ public class GameScreen implements Screen {
 
         game.batch.begin();
         player.draw(game.batch);
+        ptero.draw(game.batch);
         game.batch.end();
 
         tiledMapRenderer.render();
@@ -130,6 +134,7 @@ public class GameScreen implements Screen {
         cameraUpdate(delta);
         tiledMapRenderer.setView(camera);
         player.update(delta);
+        ptero.update(delta);
     }
 
     public void cameraUpdate(float delta){
@@ -142,5 +147,11 @@ public class GameScreen implements Screen {
         camera.position.y = player.body.getPosition().y*PPM;
         camera.position.set(position);
         camera.update();
+    }
+    public TiledMap getMap(){
+        return map;
+    }
+    public World getWorld(){
+        return world;
     }
 }

@@ -17,11 +17,11 @@ public class Controls {
         float horizontalForce = (verticalForce+100)*delta;
 
         if (left){
-            if(isInJump) horizontalVector -=0.3F;
+            if(isInJump) horizontalVector -=0.4F;
             else horizontalVector -= 0.8F;
         }
         if (right){
-            if(isInJump) horizontalVector +=0.3F;
+            if(isInJump) horizontalVector +=0.4F;
             else horizontalVector += 0.8F;
         }
         if (up){
@@ -34,7 +34,7 @@ public class Controls {
                 jumpNumber++;
             }
             if (left && !right){
-                horizontalVector = -0.7F;
+                horizontalVector = -0.8F;
             } else if (right && !left){
                 horizontalVector = 0.8F;
             }
