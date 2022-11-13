@@ -1,0 +1,73 @@
+
+All.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Buttons/exit0
+  rotate: false
+  xy: 1, 1
+  size: 254, 126
+  orig: 254, 126
+  offset: 0, 0
+  index: -1
+Buttons/exit1
+  rotate: false
+  xy: 257, 1
+  size: 254, 126
+  orig: 254, 126
+  offset: 0, 0
+  index: -1
+Buttons/play0
+  rotate: false
+  xy: 513, 1
+  size: 254, 126
+  orig: 254, 126
+  offset: 0, 0
+  index: -1
+Buttons/play1
+  rotate: false
+  xy: 769, 1
+  size: 254, 126
+  orig: 254, 126
+  offset: 0, 0
+  index: -1
+
+All2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Nick
+  rotate: false
+  xy: 1, 143
+  size: 245, 92
+  orig: 245, 92
+  offset: 0, 0
+  index: -1
+Peppa
+  rotate: false
+  xy: 1, 77
+  size: 98, 64
+  orig: 98, 64
+  offset: 0, 0
+  index: -1
+Ptero
+  rotate: false
+  xy: 248, 201
+  size: 100, 34
+  orig: 100, 34
+  offset: 0, 0
+  index: -1
+Vrag
+  rotate: false
+  xy: 1, 41
+  size: 68, 34
+  orig: 68, 34
+  offset: 0, 0
+  index: -1
+Masha
+  rotate: false
+  xy: 248, 1
+  size: 32, 198
+  orig: 32, 198
+  offset: 0, 0
+  index: -1

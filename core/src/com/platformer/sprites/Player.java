@@ -21,7 +21,7 @@ public class Player extends Sprite{
     private float stateTimer;
     private TextureRegion nickStand, nickJump;
     public Player(int x, int y, GameScreen screen){
-        super(screen.getAtlas().findRegion("Nick Names"));
+        super(screen.getAtlas().findRegion("Nick"));
         this.world = screen.getWorld();
         width = 32;
         height = 92;
@@ -33,14 +33,13 @@ public class Player extends Sprite{
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i=1; i<6; i++){
-            frames.add(new TextureRegion(getTexture(), i*31, 2, (int)width, (int)(height-1)));
+            frames.add(new TextureRegion(getTexture(), i*31, 143, (int)width-1, (int)(height-1)));
         }
         nickRun = new Animation(0.1f, frames);
         frames.clear();
+        nickJump = new TextureRegion(super.getTexture(), 220, 143, (int)width-5, (int)height);
 
-        nickJump = new TextureRegion(super.getTexture(), 221, 1, (int)width, (int)height);
-
-        nickStand = new TextureRegion(super.getTexture(), 189, 1, (int)width, (int)height);
+        nickStand = new TextureRegion(super.getTexture(), 188, 143, (int)width+1, (int)height);
         super.setBounds(x, y, width, height);
         super.setRegion(nickStand);
 

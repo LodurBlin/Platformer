@@ -53,7 +53,7 @@ public class GameScreen implements Screen {
 
         world = new World(new Vector2(0, -20f), false);
         b2dr = new Box2DDebugRenderer();
-        atlas = new TextureAtlas(Gdx.files.internal("images/Nick.pack"));
+        atlas = new TextureAtlas(Gdx.files.internal("images/All.pack"));
         player = new Player(399, 800,this);
         music = Gdx.audio.newMusic(Gdx.files.internal("music/Oblivion.mp3"));
         music.setLooping(true);
@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
         //World Contact Listener
         world.setContactListener(new WorldContactListener());
 
-        ptero = new Pterodactyl(this, .32f, .32f);
+        ptero = new Pterodactyl(this, 1000, 1000);
     }
 
     public TextureAtlas getAtlas() {
