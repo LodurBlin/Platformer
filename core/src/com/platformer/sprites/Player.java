@@ -3,6 +3,7 @@ package com.platformer.sprites;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.platformer.screens.GameScreen;
@@ -60,6 +61,12 @@ public class Player extends Sprite{
         fdef.shape=shape;
 
         body.createFixture(fdef);
+
+        EdgeShape head = new EdgeShape();
+        head.set(new Vector2(x/PPM+width/2/PPM, y/PPM+height/2/PPM), new Vector2(x/PPM+width/2/PPM, y/PPM+height/2/PPM));
+        fdef.shape = head;
+        fdef.isSensor = true;
+        body.createFixture(fdef).setUserData("head");
         shape.dispose();
     }
 
